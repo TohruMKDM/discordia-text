@@ -11,22 +11,12 @@ local GuildChannel = discordia.class.classes.GuildChannel
 
 local GuildVoiceChannel = discordia.class.classes.GuildVoiceChannel
 local get = GuildVoiceChannel.__getters
-local set = GuildVoiceChannel.__setters
 
-for k, v in pairs(TextChannel) do
-	if k:sub(1, 2) ~= '__' and type(v) == 'function' then
-		GuildVoiceChannel[k] = v
-	end
-	for name, getter in pairs(TextChannel.__getters) do
-		get[name] = getter
-	end
-	for name, setter in pairs(TextChannel.__setters) do
-		set[name] = setter
-	end
-end
+GuildVoiceChannel.__bases[#GuildVoiceChannel.__bases + 1] = TextChannel
 
+local old = GuildVoiceChannel.__init
 function GuildVoiceChannel:__init(data, parent)
-	GuildChannel.__init(self, data, parent)
+	old(self, data, parent)
 	TextChannel.__init(self, data, parent)
 end
 

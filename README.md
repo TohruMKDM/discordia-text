@@ -1,6 +1,12 @@
 # discordia-text
 discordia-text is a very simple extension library that makes sending and recieving messages from text chat in voice channels possible.
 
+# Installation
+Get this library from [lit](https://luvit.io/lit.html) with the following command
+```
+lit install TohruMKDM/discordia-text
+```
+
 # Information
 GuildVoiceChannels now inherit the TextChannel class. This means any property or method that is part of the TextChannel class is now part of GuildVoiceChannels.
 For example, you can now use methods like `:send()` on voice channel objects.
