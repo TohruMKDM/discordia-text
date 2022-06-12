@@ -29,6 +29,6 @@ client:on('messageCreate', function(message)
 end)
 ```
 
-# Notes
+# Note
 While these new text chats in voice channels are very similar to actual text channels, it is important to note that they are not 1:1.
 For example, they do not support pinned messages so the `getPinnedMessages` method is nil.

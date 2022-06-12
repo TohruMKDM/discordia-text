@@ -14,6 +14,8 @@ local get = GuildVoiceChannel.__getters
 
 GuildVoiceChannel.__bases[#GuildVoiceChannel.__bases + 1] = TextChannel
 
+local allowed = {broadcastTyping = true, getFirstMessage = true, getLastMessage = true, getMessage = true, getMessages = true, getMessagesAfter = true, getMessagesAround = true, getMessagesBefore = true, send = true, sendf = true}
+
 local old = GuildVoiceChannel.__init
 function GuildVoiceChannel:__init(data, parent)
 	old(self, data, parent)
@@ -23,6 +25,12 @@ end
 function GuildVoiceChannel:_load(data)
 	GuildChannel._load(self, data)
 	TextChannel._load(self, data)
+end
+
+for k, v in pairs(TextChannel) do
+	if allowed[k] then
+		GuildVoiceChannel[k] = v
+	end
 end
 
 -- Bad doc comment? idk im tired
